@@ -76,8 +76,8 @@ namespace L1nkedL1st
             stopWatch.Stop();
             TimeSpan ps = stopWatch.Elapsed;
             Console.WriteLine(ps.Minutes + " " + ps.Seconds + " " + ps.Milliseconds);*/
-            List<int> b = new List<int>();
-            using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
+            MyLinkedList<int> b = new MyLinkedList<int> (0);
+            /*using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
                 {
                 string a = sr.ReadLine();
                 b.Add(int.Parse(a));
@@ -92,7 +92,32 @@ namespace L1nkedL1st
                 TimeSpan ts = stopWatch.Elapsed;
                 Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);
               
-            
+            */
+            for (int i = 0; i < 10; i++)
+            {
+                    b.AddLast(i);
+            }
+            MyLinkedList<int> a = (MyLinkedList<int>)b.Clone();
+            MyLinkedList<int> c = b;
+            for (int i = 0; i < b.Count; i++)
+            {
+                Console.WriteLine(b.GetElement(i) + " " + a.GetElement(i) + " " + c.GetElement(i));
+            }
+            b.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                b.AddLast(0);
+            }
+            for (int i = 0; i < b.Count; i++)
+            {
+                Console.WriteLine(b.GetElement(i) + " " + a.GetElement(i) + " " + c.GetElement(i));
+            }
+            MyLinkedList<int> f = new MyLinkedList<int>();
+            f.AddLast(1);
+            Console.WriteLine(f.GetElement(0));
+            f.Add(new Item<int>(2));
+
+
 
 
         }

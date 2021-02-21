@@ -1,21 +1,24 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T>
+    public class MyLinkedList<T> : ICloneable, ICollection<T>
     {
         
         public Item<T> Head = null;
         public Item<T> Tail = null;
         public int Count { get; set; } //Колво элементов
+
+        public bool IsReadOnly => false;
+
         public MyLinkedList() 
         {
-            Item<T> item = new Item<T>();
-            Head = item;
-            Tail = item;
-            Count = 1;
+            Head = null;
+            Tail = null;
+            Count = 0;
         }
         public MyLinkedList(T value) 
         {
@@ -27,11 +30,21 @@ namespace L1nkedL1st
         }
         public void AddLast(T value)    //Добавить в конец элемент
         {
-            Item<T> item = new Item<T>(value);
-            item.Previous = Tail;
-            Tail.Next = item;
-            Tail = item;
-            Count++;
+            if (Head == null)
+            {
+                Head = new Item<T>(value);
+                Tail = new Item<T>(value);
+                Count++;
+            }
+            else
+            {
+
+                Item<T> item = new Item<T>(value);
+                item.Previous = Tail;
+                Tail.Next = item;
+                Tail = item;
+                Count++;
+            }
 
         }
         public void AddFirst(T value) //Добавить в начало элемент
@@ -369,7 +382,53 @@ namespace L1nkedL1st
             item.value = b;
         }
 
+        public object Clone() // Создаёт копию листа(не ссылка)
+        {
+            Item<T> item = Head;
+            MyLinkedList<T> list = new MyLinkedList<T>(item.value);
+            for(int i = 0; i < Count - 1; i++)
+            {   
+                item = item.Next;
+                list.AddLast(item.value);                
+            }
+            return list;
+        }
 
+        public void Add(Item<T> item) //Добавление самого эллемента в лист(ссылка)
+        {
+            if (Head == null)
+            {
+                Head = item;
+                Tail = item;
+                Count++;
+            }
+            else
+            {
+                item.Previous = Tail;
+                Tail.Next = item;
+                Tail = item;
+                Count++;
+            }
+        }
 
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
