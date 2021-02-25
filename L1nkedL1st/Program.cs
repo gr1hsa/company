@@ -119,7 +119,7 @@ namespace L1nkedL1st
             f.Add(new Item<int>(2));*/
             #endregion
 
-            Item<int> a = new Item<int>(0);
+            /*Item<int> a = new Item<int>(0);
             Item<int> b = new Item<int>(1);
             Item<int> c = new Item<int>(2);
             Item<int> d = new Item<int>(3);
@@ -134,7 +134,10 @@ namespace L1nkedL1st
             int[] copy = new int[1];
             list.CopyTo(copy, 9);
             foreach(Item<int> i in list)
-                Console.WriteLine(i.value);
+                Console.WriteLine(i.value);*/
+            Item<int> kk = new Item<int>(1);
+            Item<int> ff = new Item<int>(1);
+            Console.WriteLine(kk == ff);
         }
     }
 }

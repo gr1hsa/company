@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T> : ICloneable, ICollection<T>, IComparable, IEnumerable<T>  
+    public class MyLinkedList<T> : ICloneable, ICollection<T>, IComparable, IEnumerable<T>
     {
         
         public Item<T> Head = null;
