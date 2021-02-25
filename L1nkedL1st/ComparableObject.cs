@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public abstract class ComparableObject<T> : IComparable
+    public abstract class ComparableObject : IComparable
     {
         public abstract int CompareTo(object obj);
         private int Compare(object obj)
@@ -23,25 +23,25 @@ namespace L1nkedL1st
 
 
 
-        public static bool operator ==(ComparableObject<T> c, object o)
+        public static bool operator ==(ComparableObject c, object o)
         {
             if ((object)c == null || (object)0 == null)
                 return ((object)c == (object)o);
             else
                 return c.Compare(o) == 0;
         }
-        public static bool operator !=(ComparableObject<T> c, object o)
+        public static bool operator !=(ComparableObject c, object o)
         {
             if ((object)c == null || (object)0 == null)
                 return ((object)c != (object)o);
             else
                 return c.Compare(o) != 0;
         }
-        public static bool operator <(ComparableObject<T> c, object o)
+        public static bool operator <(ComparableObject c, object o)
         {
             return c.Compare(o) < 0;
         }
-        public static bool operator >(ComparableObject<T> c, object o)
+        public static bool operator >(ComparableObject c, object o)
         {
             return c.Compare(o) > 0;
         }

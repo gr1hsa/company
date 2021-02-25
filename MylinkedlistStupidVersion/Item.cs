@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace L1nkedL1st
+namespace MylinkedlistStupidVersion
 {
-    public class Item<T> : ComparableObject
+    public class Item<T>
     {
         public T value;
         public Item<T> Next;
@@ -14,15 +14,6 @@ namespace L1nkedL1st
         public Item(T a)
         {
             value = a;
-        }
-
-        public override int CompareTo(object obj)
-        {
-            Item<T> item = obj as Item<T>;
-            if (value.Equals(item.value))
-                return 0;
-            else
-                return 1;
         }
     }
 

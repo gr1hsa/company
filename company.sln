@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1nkedL1st", "L1nkedL1st\L1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Random1", "Random\Random1.csproj", "{0A242779-56DD-43F4-BEE2-EEAA3D666E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "f,abfgkauhfs", "f,abfgkauhfs\f,abfgkauhfs.csproj", "{0E8BE2C7-2D81-41E9-8D29-14EDF5509C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "f,abfgkauhfs", "f,abfgkauhfs\f,abfgkauhfs.csproj", "{0E8BE2C7-2D81-41E9-8D29-14EDF5509C06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
