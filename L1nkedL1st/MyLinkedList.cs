@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T> : ICloneable, ICollection<T>
+    public class MyLinkedList<T> : ICloneable, ICollection<T>, IComparable, IEnumerable<T>  
     {
         
         public Item<T> Head = null;
@@ -47,7 +47,7 @@ namespace L1nkedL1st
             }
 
         }
-        public void AddFirst(T value) //Добавить в начало элемент
+        public void Add(T value) //Добавить в начало элемент
         {
             Item<T> item = new Item<T>(value);
             item.Next = Head;
@@ -62,7 +62,7 @@ namespace L1nkedL1st
             if (a >= Count - 1)
                 AddLast(value);
             else if (a <= -1)
-                AddFirst(value);
+                Add(value);
             else
             {
                 while ((a > 0) && (item.Next != null))
@@ -85,7 +85,7 @@ namespace L1nkedL1st
             Item<T> item = Head;   
             Item<T> item1 = new Item<T>(value);
             if (a <= 0)
-                AddFirst(value);
+                Add(value);
             else if (a >= Count)
                 AddLast(value);
             else
@@ -104,12 +104,11 @@ namespace L1nkedL1st
             }
             
         }
-        public void Clear() // В списке остаётся 1 пустой элемент
+        public void Clear() // Список полностью очищается
         {
-            Item<T> item = new Item<T>();
-            Head = item;
-            Tail = item;
-            Count = 1;
+            Head = null;
+            Tail = null;
+            Count = 0;
         }
         public bool Contains(T value) // Проверяет имеется ли элемент с заданным значением в данном списке
         {
@@ -127,7 +126,58 @@ namespace L1nkedL1st
             }
             return a;
         }
-        public void CopyTO() { }
+        public bool Contains(Item<T> item) // Проверяет есть ли такой же эллемент(по ссылке) в листе
+        {
+            try
+            {
+                bool a = false;
+                Item<T> check = Head;
+                while (check != null && a == false)
+                {
+                    if (check == item)
+                        a = true;
+                    check = check.Next;
+                }
+                return a;
+            }
+            catch
+            {
+                Console.WriteLine("Что то сломалось в Contains");
+                return false;
+            }
+        }
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            try
+            {
+                Item<T> item = Head;
+                for(int i = arrayIndex - 1; i < arrayIndex - 1 + Count; i++)
+                {
+                    array[i] = item.value;
+                    item = item.Next;
+                }
+            }
+            catch(ArgumentNullException)
+            {
+                Console.WriteLine("Массив не существует");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Значение параметраarrayIndex меньше 0.");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Число элементов в исходной коллекции ICollection<T> больше доступного места от положения, заданного значением параметра arrayIndex, до конца массива назначения array.");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Количество эллементов в массиве меньше, чем вы пытаетесь заталкать.");
+            }
+            catch
+            {
+                Console.WriteLine("Что то сломалось в CopyTo");
+            }
+            }
         public int Find(T value) // Возвращает номер первого элемента с заданным значением
         {
             Item<T> item = Head;
@@ -163,10 +213,7 @@ namespace L1nkedL1st
             else
                 return -1;
         }
-        public void GetEnumerator() { }
-        public void GetObjectData() { }
-        public void OnDeserialization() { }
-        public void Remove(T value) //удаляет первый элемент с заданным значением
+        public bool Remove(T value) //удаляет первый элемент с заданным значением
         {
             Item<T> item = Head;
             Item<T> item1 = Head.Next;
@@ -175,6 +222,7 @@ namespace L1nkedL1st
             {
                 RemoveFirst();
                 t = 1;
+                return true;
             }
             item = item.Next;
             while((item.Next != null) && (t != 1))
@@ -187,14 +235,56 @@ namespace L1nkedL1st
                     item1.Previous = item;
                     t = 1;
                     Count--;
+                    return true;
                 }
                 item = item.Next;
                 item1 = item1.Next;
             }
-            if((t != 1) && (item.value.Equals(value)))
+            if ((t != 1) && (item.value.Equals(value)))
             {
                 RemoveLast();
+                return true;
             }
+            else
+                return false;
+        }
+        public bool Remove(Item<T> item)
+        {
+            bool result = false;
+            Item<T> head = Head;
+            Item<T> del;
+            int k = 0;
+         
+                while (head != null && result == false)
+                {
+                    if (head == item)
+                    {
+                    if (k == 0)
+                    {
+                        Head = head.Next;
+                        Head.Previous = null;
+                    }
+                    else if (k == Count - 1)
+                    {
+                        Tail = head.Previous;
+                        Tail.Next = null;
+                    }
+                    else
+                    {
+                        result = true;
+                        del = head.Next;
+                        head = head.Previous;
+                        del.Previous = head;
+                        head.Next = del;
+                    }
+                    Count--;
+                    }
+                    k++;
+                    head = head.Next;
+                }
+  
+
+            return result;
         }
         public void RemoveFirst() //Удаляет первый элемент листа
         {
@@ -411,14 +501,16 @@ namespace L1nkedL1st
             }
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        bool ICollection<T>.Remove(T item)
+        public IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException();
+            Item<T> item = Head;
+            for (int i = 0; i < Count; i++)
+            {
+                yield return item;
+                item = item.Next;
+            }
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -426,9 +518,13 @@ namespace L1nkedL1st
             throw new NotImplementedException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            MyLinkedList<T> list = obj as MyLinkedList<T>;
+            if (list != null)
+                return Count.CompareTo(list.Count);
+            else
+                throw new Exception("Листы разных типов.");
         }
     }
 }

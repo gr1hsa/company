@@ -48,6 +48,7 @@ namespace L1nkedL1st
         }
         static void Main(string[] args)
         {
+            #region Мусор
             /*MyLinkedList<int> qq = new MyLinkedList<int>(10);
             using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
             {
@@ -62,7 +63,7 @@ namespace L1nkedL1st
             qq.QuickSort(0, qq.Count);
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
-            Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);*/
+            Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);
             /*using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
             {
                 string a = sr.ReadLine();
@@ -75,9 +76,9 @@ namespace L1nkedL1st
             qq.BubbleSort();
             stopWatch.Stop();
             TimeSpan ps = stopWatch.Elapsed;
-            Console.WriteLine(ps.Minutes + " " + ps.Seconds + " " + ps.Milliseconds);*/
+            Console.WriteLine(ps.Minutes + " " + ps.Seconds + " " + ps.Milliseconds);
             MyLinkedList<int> b = new MyLinkedList<int> (0);
-            /*using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
+            using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
                 {
                 string a = sr.ReadLine();
                 b.Add(int.Parse(a));
@@ -92,7 +93,7 @@ namespace L1nkedL1st
                 TimeSpan ts = stopWatch.Elapsed;
                 Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);
               
-            */
+            
             for (int i = 0; i < 10; i++)
             {
                     b.AddLast(i);
@@ -115,11 +116,25 @@ namespace L1nkedL1st
             MyLinkedList<int> f = new MyLinkedList<int>();
             f.AddLast(1);
             Console.WriteLine(f.GetElement(0));
-            f.Add(new Item<int>(2));
+            f.Add(new Item<int>(2));*/
+            #endregion
 
-
-
-
+            Item<int> a = new Item<int>(0);
+            Item<int> b = new Item<int>(1);
+            Item<int> c = new Item<int>(2);
+            Item<int> d = new Item<int>(3);
+            MyLinkedList<int> list = new MyLinkedList<int>();
+            list.Add(a);
+            list.Add(b);
+            list.Add(c);
+            list.Add(d);
+            Console.WriteLine(list.Contains(c));
+            list.Remove(d);
+            list.Output();
+            int[] copy = new int[1];
+            list.CopyTo(copy, 9);
+            foreach(Item<int> i in list)
+                Console.WriteLine(i.value);
         }
     }
 }
