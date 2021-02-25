@@ -10,7 +10,7 @@ namespace L1nkedL1st
         
         public Item<T> Head = null;
         public Item<T> Tail = null;
-        public int Count { get; set; } //Колво элементов
+        public int Count  { get; set; } //Колво элементов
 
         public bool IsReadOnly => false;
 
