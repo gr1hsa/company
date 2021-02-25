@@ -136,10 +136,11 @@ namespace L1nkedL1st
             foreach(Item<int> i in list)
                 Console.WriteLine(i.value);*/
             Item<int> kk = new Item<int>(1);
-            Item<int> ff = new Item<int>(1);
+            Item<int> ff = new Item<int>(2);
             Item<string> gg = new Item<string>("1");
             Item<decimal> dd = new Item<decimal>(1);
-            Console.WriteLine(dd != gg);
+            Console.WriteLine(ff < kk);
+            MyLinkedList<int> tt = new MyLinkedList<int>(123);
             Console.WriteLine(gg.GetType().FullName + " " + dd.GetType().FullName);
             
         }

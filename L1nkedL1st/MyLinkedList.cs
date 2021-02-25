@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T> : ICloneable, ICollection<T>, IComparable, IEnumerable<T>
+    public class MyLinkedList<T> : ICloneable, IEnumerable<T>, ICollection<T> where T : Item<T>, IComparable<T>
     {
-        
+
         public Item<T> Head = null;
         public Item<T> Tail = null;
-        public int Count  { get; set; } //Колво элементов
+        public int Count { get; set; } //Колво элементов
 
         public bool IsReadOnly => false;
 
-        public MyLinkedList() 
+        public MyLinkedList()
         {
             Head = null;
             Tail = null;
             Count = 0;
         }
-        public MyLinkedList(T value) 
+        public MyLinkedList(T value)
         {
             Item<T> item = new Item<T>(value);
             Head = item;
@@ -57,7 +58,7 @@ namespace L1nkedL1st
         }
         public void AddAfter(int a, T value) // Добавляет элемент после н-го элменета
         {
-            Item<T> item = Head;    
+            Item<T> item = Head;
             Item<T> item1 = new Item<T>(value);
             if (a >= Count - 1)
                 AddLast(value);
@@ -78,11 +79,11 @@ namespace L1nkedL1st
                 item.Previous = item1;
                 Count++;
             }
-            
+
         }
         public void AddBefore(int a, T value) // Добавляет элемент перед н-ым элменетом
         {
-            Item<T> item = Head;   
+            Item<T> item = Head;
             Item<T> item1 = new Item<T>(value);
             if (a <= 0)
                 Add(value);
@@ -102,7 +103,7 @@ namespace L1nkedL1st
                 item.Previous = item1;
                 Count++;
             }
-            
+
         }
         public void Clear() // Список полностью очищается
         {
@@ -115,7 +116,7 @@ namespace L1nkedL1st
             bool a = false;
             int flag = 0;
             Item<T> item = Head;
-            while(item != null)
+            while (item != null)
             {
                 if (item.value.Equals(value) && flag == 0)
                 {
@@ -151,13 +152,13 @@ namespace L1nkedL1st
             try
             {
                 Item<T> item = Head;
-                for(int i = arrayIndex - 1; i < arrayIndex - 1 + Count; i++)
+                for (int i = arrayIndex - 1; i < arrayIndex - 1 + Count; i++)
                 {
                     array[i] = item.value;
                     item = item.Next;
                 }
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 Console.WriteLine("Массив не существует");
             }
@@ -177,13 +178,13 @@ namespace L1nkedL1st
             {
                 Console.WriteLine("Что то сломалось в CopyTo");
             }
-            }
+        }
         public int Find(T value) // Возвращает номер первого элемента с заданным значением
         {
             Item<T> item = Head;
             int a = 0;
             int flag = 0;
-            while(item != null && flag == 0)
+            while (item != null && flag == 0)
             {
                 if (item.value.Equals(value))
                     flag = 1;
@@ -194,7 +195,7 @@ namespace L1nkedL1st
                 return a;
             else
                 return -1;
-            
+
         }
         public int FindLast(T value) // Возвращает номер последнего элемента с заданным значением
         {
@@ -218,16 +219,16 @@ namespace L1nkedL1st
             Item<T> item = Head;
             Item<T> item1 = Head.Next;
             int t = 0;
-            if(item.value.Equals(value))
+            if (item.value.Equals(value))
             {
                 RemoveFirst();
                 t = 1;
                 return true;
             }
             item = item.Next;
-            while((item.Next != null) && (t != 1))
+            while ((item.Next != null) && (t != 1))
             {
-                if(item.value.Equals(value))
+                if (item.value.Equals(value))
                 {
                     item = item.Previous;
                     item.Next = item.Next.Next;
@@ -254,11 +255,11 @@ namespace L1nkedL1st
             Item<T> head = Head;
             Item<T> del;
             int k = 0;
-         
-                while (head != null && result == false)
+
+            while (head != null && result == false)
+            {
+                if (head == item)
                 {
-                    if (head == item)
-                    {
                     if (k == 0)
                     {
                         Head = head.Next;
@@ -278,11 +279,11 @@ namespace L1nkedL1st
                         head.Next = del;
                     }
                     Count--;
-                    }
-                    k++;
-                    head = head.Next;
                 }
-  
+                k++;
+                head = head.Next;
+            }
+
 
             return result;
         }
@@ -353,7 +354,7 @@ namespace L1nkedL1st
                 Console.WriteLine("Нет");
             }
         }
-            
+
         public void Output() //Вывести весь списокб
         {
             for (int i = 0; i < Count; i++)
@@ -365,7 +366,7 @@ namespace L1nkedL1st
         {
             Item<T> item = Head;
             int k = 1;
-            while(item.Next != null)
+            while (item.Next != null)
             {
                 k++;
                 item = item.Next;
@@ -376,7 +377,7 @@ namespace L1nkedL1st
         {
             T x;
             Item<T> item = Head;
-            while(a > 0 && item.Next != null)
+            while (a > 0 && item.Next != null)
             {
                 a--;
                 item = item.Next;
@@ -389,17 +390,17 @@ namespace L1nkedL1st
         {
             T x;
             Item<T> item = Head;
-            for(int i = 0; i < Count - 1; i++)
+            for (int i = 0; i < Count - 1; i++)
             {
-                for(int j = 0; j < Count - 1 - i; j++)
+                for (int j = 0; j < Count - 1 - i; j++)
                 {
-                   var compareResult = ((IComparable)item.value).CompareTo((IComparable)item.Next.value);
-                    if(compareResult == 1)
+                    var compareResult = ((IComparable)item.value).CompareTo((IComparable)item.Next.value);
+                    if (compareResult == 1)
                     {
                         x = item.value;
                         item.value = item.Next.value;
                         item.Next.value = x;
-                     }
+                    }
                     item = item.Next;
                 }
                 item = Head;
@@ -407,11 +408,11 @@ namespace L1nkedL1st
         }
         public void QuickSort(int l, int r)
         {
-            int m1 = l, m2 = 0; 
+            int m1 = l, m2 = 0;
             T peremen;
             Item<T> item = Head;
-            
-            if(r - l > 1)
+
+            if (r - l > 1)
             {
                 for (int i = 0; i < l; i++)
                     item = item.Next;
@@ -423,14 +424,14 @@ namespace L1nkedL1st
                     var compareResult = ((IComparable)b).CompareTo((IComparable)item.value);
                     if (compareResult == 1)
                     {
-                        if (m1 + m2 == i )
+                        if (m1 + m2 == i)
                         {
                             peremen = item.value;
                             item.value = GetElement(m1);
                             ChangeValue(m1, peremen);
                             m1++;
                         }
-                        if (m1 + m2 < i )
+                        if (m1 + m2 < i)
                         {
                             peremen = item.value;
                             item.value = GetElement(m1);
@@ -454,17 +455,17 @@ namespace L1nkedL1st
                         m2++;
                     }
                     item = item.Next;
-                   
+
                 }
                 QuickSort(l, m1);
                 QuickSort(r - m2, r);
             }
-            
+
         }
         public void ChangeValue(int a, T b)
         {
             Item<T> item = Head;
-            while(a > 0)
+            while (a > 0)
             {
                 item = item.Next;
                 a--;
@@ -476,10 +477,10 @@ namespace L1nkedL1st
         {
             Item<T> item = Head;
             MyLinkedList<T> list = new MyLinkedList<T>(item.value);
-            for(int i = 0; i < Count - 1; i++)
-            {   
+            for (int i = 0; i < Count - 1; i++)
+            {
                 item = item.Next;
-                list.AddLast(item.value);                
+                list.AddLast(item.value);
             }
             return list;
         }
@@ -501,7 +502,7 @@ namespace L1nkedL1st
             }
         }
 
-        
+
 
         public IEnumerator GetEnumerator()
         {
@@ -513,12 +514,29 @@ namespace L1nkedL1st
             }
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+
+        /*public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            MyLinkedList<T> list = obj as MyLinkedList<T>;
+            if (list != null)
+                return Count.CompareTo(list.Count);
+            else
+                throw new Exception("Листы разных типов.");
+        }*/
+
+      
+
+        public int CompareTo([AllowNull] T other)
+        {
+            throw new NotImplementedException(); //TODO: разобаться
         }
 
-        public int CompareTo(object obj)
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            throw new NotImplementedException(); //TODO fjksakd
+        }
+
+        public override int CompareTo(object obj)
         {
             MyLinkedList<T> list = obj as MyLinkedList<T>;
             if (list != null)

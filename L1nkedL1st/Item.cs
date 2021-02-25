@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class Item<T> : ComparableObject
+    public class Item<T>  : ComparableObject where T : IComparable
     {
         public T value;
         public Item<T> Next;
@@ -16,14 +16,18 @@ namespace L1nkedL1st
             value = a;
         }
 
+       
+
         public override int CompareTo(object obj)
         {
             Item<T> item = obj as Item<T>;
-            if (value.Equals(item.value))
-                return 0;
-            else
+            if (value.CompareTo(item.value) > 0)
                 return 1;
+            else if (value.CompareTo(item.value) < 0)
+                return -1;
+            else return 0;
         }
     }
+   
 
 }
