@@ -48,13 +48,25 @@ namespace L1nkedL1st
             }
 
         }
-        public void Add(T value) //Добавить в начало элемент
+        public void Add(T value) //Добавить в конец листа по значению
         {
+
             Item<T> item = new Item<T>(value);
-            item.Next = Head;
-            Head.Previous = item;
-            Head = item;
-            Count++;
+            if (Count == 0)
+            {
+                Head = item;
+                Tail = item;
+                Count = 1;
+            }
+            else
+            {
+                Tail.Next = item;
+                item.Previous = Tail;
+                Tail = item;
+                Count++;
+            }
+
+
         }
         public void AddAfter(int a, T value) // Добавляет элемент после н-го элменета
         {
@@ -107,9 +119,16 @@ namespace L1nkedL1st
         }
         public void Clear() // Список полностью очищается
         {
-            Head = null;
-            Tail = null;
-            Count = 0;
+            try
+            {
+                Head = null;
+                Tail = null;
+                Count = 0;
+            }
+            catch(NotSupportedException)
+            {
+                Console.WriteLine("Объект ICollection < T > доступен только для чтения.");
+            }
         }
         public bool Contains(T value) // Проверяет имеется ли элемент с заданным значением в данном списке
         {
@@ -133,8 +152,8 @@ namespace L1nkedL1st
             {
                 bool a = false;
                 Item<T> check = Head;
-                    
-               for(int i = 0; i < Count; i++)
+
+                for (int i = 0; i < Count; i++)
                 {
                     if (check == item && a == false)
                         a = true;
@@ -148,7 +167,7 @@ namespace L1nkedL1st
                 return false;
             }
         }
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(T[] array, int arrayIndex) //Коппирует значение листа в массив начаина с array[i=1](Указывать с 1)
         {
             try
             {
@@ -174,10 +193,6 @@ namespace L1nkedL1st
             catch (IndexOutOfRangeException)
             {
                 Console.WriteLine("Количество эллементов в массиве меньше, чем вы пытаетесь заталкать.");
-            }
-            catch
-            {
-                Console.WriteLine("Что то сломалось в CopyTo");
             }
         }
         public int Find(T value) // Возвращает номер первого элемента с заданным значением
@@ -217,40 +232,48 @@ namespace L1nkedL1st
         }
         public bool Remove(T value) //удаляет первый элемент с заданным значением
         {
-            Item<T> item = Head;
-            Item<T> item1 = Head.Next;
-            int t = 0;
-            if (item.value.Equals(value))
+            try
             {
-                RemoveFirst();
-                t = 1;
-                return true;
-            }
-            item = item.Next;
-            while ((item.Next != null) && (t != 1))
-            {
+                Item<T> item = Head;
+                Item<T> item1 = Head.Next;
+                int t = 0;
                 if (item.value.Equals(value))
                 {
-                    item = item.Previous;
-                    item.Next = item.Next.Next;
-                    item1 = item1.Next;
-                    item1.Previous = item;
+                    RemoveFirst();
                     t = 1;
-                    Count--;
                     return true;
                 }
                 item = item.Next;
-                item1 = item1.Next;
+                while ((item.Next != null) && (t != 1))
+                {
+                    if (item.value.Equals(value))
+                    {
+                        item = item.Previous;
+                        item.Next = item.Next.Next;
+                        item1 = item1.Next;
+                        item1.Previous = item;
+                        t = 1;
+                        Count--;
+                        return true;
+                    }
+                    item = item.Next;
+                    item1 = item1.Next;
+                }
+                if ((t != 1) && (item.value.Equals(value)))
+                {
+                    RemoveLast();
+                    return true;
+                }
+                else
+                    return false;
             }
-            if ((t != 1) && (item.value.Equals(value)))
+            catch(NotSupportedException)
             {
-                RemoveLast();
-                return true;
-            }
-            else
+                Console.WriteLine("Список ICollection<T> доступен только для чтения.");
                 return false;
+            }
         }
-        public bool Remove(Item<T> item)
+        public bool Remove(Item<T> item) //удаление первого совпавшего( по ссылке) элемента
         {
             bool result = false;
             Item<T> head = Head;
@@ -481,25 +504,32 @@ namespace L1nkedL1st
             for (int i = 0; i < Count - 1; i++)
             {
                 item = item.Next;
-                list.AddLast(item.value);
+                list.Add(item.value);
             }
             return list;
         }
 
         public void Add(Item<T> item) //Добавление самого эллемента в лист(ссылка)
         {
-            if (Head == null)
+            try
             {
-                Head = item;
-                Tail = item;
-                Count++;
+                if (Head == null)
+                {
+                    Head = item;
+                    Tail = item;
+                    Count++;
+                }
+                else
+                {
+                    item.Previous = Tail;
+                    Tail.Next = item;
+                    Tail = item;
+                    Count++;
+                }
             }
-            else
+            catch(NotSupportedException)
             {
-                item.Previous = Tail;
-                Tail.Next = item;
-                Tail = item;
-                Count++;
+                Console.WriteLine("Объект ICollection<T> доступен только для чтения.");
             }
         }
 
@@ -510,7 +540,7 @@ namespace L1nkedL1st
             Item<T> item = Head;
             for (int i = 0; i < Count; i++)
             {
-                yield return item;
+                yield return item.value;
                 item = item.Next;
             }
         }
@@ -527,23 +557,29 @@ namespace L1nkedL1st
 
 
 
-        public int CompareTo([AllowNull] T other)
-        {
-            throw new NotImplementedException(); //TODO: разобаться
-        }
+
+
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            throw new NotImplementedException(); //TODO fjksakd
+            throw new NotImplementedException();
         }
 
         public int CompareTo(object obj)
         {
-            MyLinkedList<T> list = obj as MyLinkedList<T>;
-            if (list != null)
-                return Count.CompareTo(list.Count);
-            else
-                throw new Exception("Листы разных типов.");
+            try
+            {
+                if (Count > (obj as MyLinkedList<T>).Count)
+                    return 1;
+                else if (Count < (obj as MyLinkedList<T>).Count)
+                    return -1;
+                else return 0;
+            }
+            catch
+            {
+                Console.WriteLine("Листы разных типов!");
+                return default;
+            }
         }
     }
 }
