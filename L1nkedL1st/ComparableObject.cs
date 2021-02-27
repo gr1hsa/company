@@ -10,6 +10,7 @@ namespace L1nkedL1st
         public abstract int CompareTo(object obj);
         private int Compare(object obj)
         {
+            
             if (obj != null && GetType() == obj.GetType())
                 return CompareTo(obj);
 
@@ -25,14 +26,14 @@ namespace L1nkedL1st
 
         public static bool operator ==(ComparableObject c, object o)
         {
-            if ((object)c == null || (object)0 == null)
+            if ((object)c == null || (object)o == null)
                 return ((object)c == (object)o);
             else
                 return c.Compare(o) == 0;
         }
         public static bool operator !=(ComparableObject c, object o)
         {
-            if ((object)c == null || (object)0 == null)
+            if ((object)c == null || (object)o == null)
                 return ((object)c != (object)o);
             else
                 return c.Compare(o) != 0;
@@ -44,6 +45,14 @@ namespace L1nkedL1st
         public static bool operator >(ComparableObject c, object o)
         {
             return c.Compare(o) > 0;
+        }
+        public static bool operator <=(ComparableObject c, object o)
+        {
+            return c.Compare(o) <= 0;
+        }
+        public static bool operator >=(ComparableObject c, object o)
+        {
+            return c.Compare(o) >= 0;
         }
 
     }

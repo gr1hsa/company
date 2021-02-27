@@ -49,7 +49,7 @@ namespace L1nkedL1st
         static void Main(string[] args)
         {
             #region Мусор
-            /*MyLinkedList<int> qq = new MyLinkedList<int>(10);
+           /* MyLinkedList<int> qq = new MyLinkedList<int>(10);
             using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
             {
                 string a = sr.ReadLine();
@@ -64,7 +64,7 @@ namespace L1nkedL1st
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
             Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);
-            /*using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
+            using (var sr = new StreamReader(@"C:\Users\гришша\source\repos\company\Random\bin\Debug\netcoreapp3.1\Random123.txt"))
             {
                 string a = sr.ReadLine();
                 qq.AddLast(int.Parse(a));
@@ -91,35 +91,17 @@ namespace L1nkedL1st
                 b = Quick(b);
                 stopWatch.Stop();
                 TimeSpan ts = stopWatch.Elapsed;
-                Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);
+                Console.WriteLine(ts.Minutes + " " + ts.Seconds + " " + ts.Milliseconds);*/
               
             
-            for (int i = 0; i < 10; i++)
-            {
-                    b.AddLast(i);
-            }
-            MyLinkedList<int> a = (MyLinkedList<int>)b.Clone();
-            MyLinkedList<int> c = b;
-            for (int i = 0; i < b.Count; i++)
-            {
-                Console.WriteLine(b.GetElement(i) + " " + a.GetElement(i) + " " + c.GetElement(i));
-            }
-            b.Clear();
-            for (int i = 0; i < 10; i++)
-            {
-                b.AddLast(0);
-            }
-            for (int i = 0; i < b.Count; i++)
-            {
-                Console.WriteLine(b.GetElement(i) + " " + a.GetElement(i) + " " + c.GetElement(i));
-            }
+            
             MyLinkedList<int> f = new MyLinkedList<int>();
             f.AddLast(1);
             Console.WriteLine(f.GetElement(0));
-            f.Add(new Item<int>(2));*/
+            f.Add(new Item<int>(2));
             #endregion
 
-            /*Item<int> a = new Item<int>(0);
+            Item<int> a = new Item<int>(0);
             Item<int> b = new Item<int>(1);
             Item<int> c = new Item<int>(2);
             Item<int> d = new Item<int>(3);
@@ -129,20 +111,30 @@ namespace L1nkedL1st
             list.Add(c);
             list.Add(d);
             Console.WriteLine(list.Contains(c));
-            list.Remove(d);
+            list.Remove(3);
             list.Output();
             int[] copy = new int[1];
             list.CopyTo(copy, 9);
             foreach(Item<int> i in list)
-                Console.WriteLine(i.value);*/
+                Console.WriteLine(i.value);
             Item<int> kk = new Item<int>(1);
             Item<int> ff = new Item<int>(2);
             Item<string> gg = new Item<string>("1");
             Item<decimal> dd = new Item<decimal>(1);
-            Console.WriteLine(ff < kk);
-            MyLinkedList<int> tt = new MyLinkedList<int>(123);
-            Console.WriteLine(gg.GetType().FullName + " " + dd.GetType().FullName);
+            Console.WriteLine(ff >= kk);
+            MyLinkedList<int> tt = new MyLinkedList<int>();
+            tt.Add(ff);
+            tt.Add(kk);
+            Item<int>[] mlist = new Item<int>[102];
+            Random rnd = new Random();
+            for (int i = 0; i < 102; i++)
+                mlist[i] = new Item<int>(rnd.Next(0, 1000));
+            //Array.Sort(tt, Item<int>, new ItemComparer<int>());
+            foreach(Item<int> i in mlist)
+                Console.WriteLine(i.value);
+
             
+
         }
     }
 }

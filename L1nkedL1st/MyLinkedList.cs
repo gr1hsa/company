@@ -6,7 +6,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T> : ICloneable, IEnumerable<T>, ICollection<T> where T : Item<T>, IComparable<T>
+    public class MyLinkedList<T> : ICloneable, IEnumerable<T>, ICollection<T> where T : IComparable
     {
 
         public Item<T> Head = null;
@@ -133,9 +133,10 @@ namespace L1nkedL1st
             {
                 bool a = false;
                 Item<T> check = Head;
-                while (check != null && a == false)
+                    
+               for(int i = 0; i < Count; i++)
                 {
-                    if (check == item)
+                    if (check == item && a == false)
                         a = true;
                     check = check.Next;
                 }
@@ -524,7 +525,7 @@ namespace L1nkedL1st
                 throw new Exception("Листы разных типов.");
         }*/
 
-      
+
 
         public int CompareTo([AllowNull] T other)
         {
@@ -536,7 +537,7 @@ namespace L1nkedL1st
             throw new NotImplementedException(); //TODO fjksakd
         }
 
-        public override int CompareTo(object obj)
+        public int CompareTo(object obj)
         {
             MyLinkedList<T> list = obj as MyLinkedList<T>;
             if (list != null)
