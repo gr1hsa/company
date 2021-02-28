@@ -181,14 +181,24 @@ namespace L1nkedL1st
             #region Проверка Sort
             MyLinkedList<int> sort = new MyLinkedList<int>();
             Random rnd = new Random();
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 50; i++)
                 sort.Add(rnd.Next(123, 1000));
-            foreach (int i in sort)
-                Console.Write(i + " ");
+            /*foreach (int i in sort)
+                Console.Write(i + " ");*/
             Console.WriteLine();
             sort.Sort(new ItemComparer<int>());
-            foreach(int i in sort)
-                Console.Write(i + " " );
+            Item<int>[] kkkk = new Item<int>[10];
+
+            for (int i = 0; i < 10; i++)
+                kkkk[i] = new Item<int>(rnd.Next(123, 1000));
+            for (int i = 0; i < 10; i++)
+                Console.Write(kkkk[i].value + " ");
+            Console.WriteLine();
+            Array.Sort(kkkk, new ItemComparer<int>());
+            for(int i = 0; i < 10; i++)
+                Console.Write(kkkk[i].value +  " ");
+            /*foreach(int i in sort)
+                Console.Write(i + " " );*/
    
             //Array.sort
             #endregion
