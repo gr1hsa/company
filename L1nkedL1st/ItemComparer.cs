@@ -6,7 +6,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class ItemComparer<T> : IComparer where T : IComparable
+    public class ItemComparer<T> : Item<T>, IComparer     where T : IComparable
     {
 
 
@@ -15,10 +15,12 @@ namespace L1nkedL1st
             Item<T> item1 = x as Item<T>;
             Item<T> item2 = y as Item<T>;
             if (item1 != null && item2 != null)
-                return Compare(item1.value, item2.value);
+                return item1.value.CompareTo(item2.value);
             else
-                throw new Exception("askfkas;");
+                throw new Exception("Разные типы!");
 
         }
+
+        
     }
 }

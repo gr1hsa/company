@@ -27,6 +27,8 @@ namespace L1nkedL1st
                 return -1;
             else return 0;
         }
+        public static IComparer<T> ItemComparerValue
+        { get { return (IComparer<T>)new ItemComparer<T>(); } }
     }
    
 

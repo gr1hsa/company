@@ -119,8 +119,8 @@ namespace L1nkedL1st
             add.Add(addcheck);
             Console.WriteLine(add.Contains(123) + "  "  + add.Contains(11) + "  " + add.Contains(addcheck));
             Console.WriteLine("Проверка CopyTo");
-            int[] copyto1 = new int[100];
-            int[] copyto2 = new int[3];
+            Item<int>[] copyto1 = new Item<int>[100];
+            Item<int>[] copyto2 = new Item<int>[3];
             add.CopyTo(copyto1, 1);
             add.CopyTo(copyto2, 2);
             Console.WriteLine("Проверка Remove");
@@ -130,8 +130,8 @@ namespace L1nkedL1st
             add.Remove(1);
             add.Remove(addcheck);
             foreach (int i in add)
-                Console.Write(i + " ");*/
-
+                Console.Write(i + " ");
+            Console.WriteLine();*/
 
             #endregion
             #region Проверка IEnumerable<T>
@@ -150,16 +150,16 @@ namespace L1nkedL1st
             Console.WriteLine(list1.CompareTo(list3));*/
             #endregion
             #region Проверка IClonable
-            /*MyLinkedList<int> orig = new MyLinkedList<int>();
+           /*MyLinkedList<int> orig = new MyLinkedList<int>();
             for (int i = 0; i < 10; i++)
                 orig.Add(i);
             MyLinkedList<int> copylink = orig;
             MyLinkedList<int> clone = (MyLinkedList<int>)orig.Clone();
             foreach (int i in orig)
-                Console.Write(i.value + " ");
+                Console.Write(i + " ");
             Console.WriteLine();
             foreach (int i in copylink)
-                Console.Write(i.value + " ");
+                Console.Write(i + " ");
             Console.WriteLine();
             foreach (Item<int> i in clone)
                 Console.Write(i.value + " ");
@@ -167,13 +167,13 @@ namespace L1nkedL1st
             orig.Remove(1);
             orig.Remove(2);
             foreach(int i in orig)
-                Console.Write(i.value + " ");
+                Console.Write(i + " ");
             Console.WriteLine();
             foreach(int i in copylink)
-                Console.Write(i.value + " ");
+                Console.Write(i + " ");
             Console.WriteLine();
             foreach(int i in clone)
-                Console.Write(i.value + " ");
+                Console.Write(i + " ");
             Console.WriteLine();*/
 
 
@@ -181,12 +181,16 @@ namespace L1nkedL1st
             #region Проверка Sort
             MyLinkedList<int> sort = new MyLinkedList<int>();
             Random rnd = new Random();
-            
-            ;
-            for (int i = 0; i < 10; i++)
-                sort.Add(rnd.Next(0, 1000));
-            Item<int>[] sortarray = new Item<int>[sort.Count];
-            Array.Sort(sortarray, new ItemComparer<int>());
+            for (int i = 0; i < 30; i++)
+                sort.Add(rnd.Next(123, 1000));
+            foreach (int i in sort)
+                Console.Write(i + " ");
+            Console.WriteLine();
+            sort.Sort(new ItemComparer<int>());
+            foreach(int i in sort)
+                Console.Write(i + " " );
+   
+            //Array.sort
             #endregion
     #region trash
                 /*Item<int> a = new Item<int>(0);

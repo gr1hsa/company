@@ -125,7 +125,7 @@ namespace L1nkedL1st
                 Tail = null;
                 Count = 0;
             }
-            catch(NotSupportedException)
+            catch (NotSupportedException)
             {
                 Console.WriteLine("Объект ICollection < T > доступен только для чтения.");
             }
@@ -167,14 +167,14 @@ namespace L1nkedL1st
                 return false;
             }
         }
-        public void CopyTo(T[] array, int arrayIndex) //Коппирует значение листа в массив начаина с array[i=1](Указывать с 1)
+        public void CopyTo(Item<T>[] array, int arrayIndex) //Коппирует значение листа в массив начаина с array[i=1](Указывать с 1)
         {
             try
             {
                 Item<T> item = Head;
                 for (int i = arrayIndex - 1; i < arrayIndex - 1 + Count; i++)
                 {
-                    array[i] = item.value;
+                    array[i] = item;
                     item = item.Next;
                 }
             }
@@ -267,7 +267,7 @@ namespace L1nkedL1st
                 else
                     return false;
             }
-            catch(NotSupportedException)
+            catch (NotSupportedException)
             {
                 Console.WriteLine("Список ICollection<T> доступен только для чтения.");
                 return false;
@@ -527,7 +527,7 @@ namespace L1nkedL1st
                     Count++;
                 }
             }
-            catch(NotSupportedException)
+            catch (NotSupportedException)
             {
                 Console.WriteLine("Объект ICollection<T> доступен только для чтения.");
             }
@@ -579,6 +579,54 @@ namespace L1nkedL1st
             {
                 Console.WriteLine("Листы разных типов!");
                 return default;
+            }
+        }
+        public void Sort()
+        {
+            Item<T>[] array = new Item<T>[Count];
+            CopyTo(array, 1);
+            Array.Sort(array);
+            Clear();
+            for (int i = 0; i < array.Length; i++)
+                Add(array[i]);
+        }
+        public void Sort(ItemComparer<T> Com)
+        {
+            Item<T>[] array = new Item<T>[Count];
+            CopyTo(array, 1);
+            Array.Sort(array, Com);
+            Clear();
+            for (int i = 0; i < array.Length; i++)
+                Add(array[i]);
+
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            try
+            {
+                Item<T> item = Head;
+                for (int i = arrayIndex - 1; i < arrayIndex - 1 + Count; i++)
+                {
+                    array[i] = item.value;
+                    item = item.Next;
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Массив не существует");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Значение параметраarrayIndex меньше 0.");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Число элементов в исходной коллекции ICollection<T> больше доступного места от положения, заданного значением параметра arrayIndex, до конца массива назначения array.");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("Количество эллементов в массиве меньше, чем вы пытаетесь заталкать.");
             }
         }
     }
