@@ -6,7 +6,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class MyLinkedList<T> : ICloneable, IEnumerable<T>, ICollection<T> where T : IComparable
+    public class MyLinkedList<T> : ICloneable, IEnumerable<T>, ICollection<T> where T: IComparable<T>
     {
 
         public Item<T> Head = null;
@@ -590,7 +590,7 @@ namespace L1nkedL1st
             for (int i = 0; i < array.Length; i++)
                 Add(array[i]);
         }
-        public void Sort(ItemComparer<T> Com)
+        public void Sort(IComparer Com)
         {
             Item<T>[] array = new Item<T>[Count];
             CopyTo(array, 1);

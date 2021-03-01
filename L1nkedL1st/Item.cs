@@ -5,7 +5,7 @@ using System.Text;
 
 namespace L1nkedL1st
 {
-    public class Item<T>  : ComparableObject where T : IComparable
+    public class Item<T>  : ComparableObject where T : IComparable<T>
     {
         public T value;
         public Item<T> Next;
@@ -27,8 +27,7 @@ namespace L1nkedL1st
                 return -1;
             else return 0;
         }
-        public static IComparer<T> ItemComparerValue
-        { get { return (IComparer<T>)new ItemComparer<T>(); } }
+         
     }
    
 

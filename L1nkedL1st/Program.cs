@@ -147,34 +147,34 @@ namespace L1nkedL1st
                 list2.Add(i);
             }
             Console.WriteLine(list1.CompareTo(list2));
-            Console.WriteLine(list1.CompareTo(list3));*/
+            Console.WriteLine(list1.CompareTo(list3));
             #endregion
             #region Проверка IClonable
-           /*MyLinkedList<int> orig = new MyLinkedList<int>();
-            for (int i = 0; i < 10; i++)
-                orig.Add(i);
-            MyLinkedList<int> copylink = orig;
-            MyLinkedList<int> clone = (MyLinkedList<int>)orig.Clone();
-            foreach (int i in orig)
-                Console.Write(i + " ");
-            Console.WriteLine();
-            foreach (int i in copylink)
-                Console.Write(i + " ");
-            Console.WriteLine();
-            foreach (Item<int> i in clone)
-                Console.Write(i.value + " ");
-            Console.WriteLine();
-            orig.Remove(1);
-            orig.Remove(2);
-            foreach(int i in orig)
-                Console.Write(i + " ");
-            Console.WriteLine();
-            foreach(int i in copylink)
-                Console.Write(i + " ");
-            Console.WriteLine();
-            foreach(int i in clone)
-                Console.Write(i + " ");
-            Console.WriteLine();*/
+            MyLinkedList<int> orig = new MyLinkedList<int>();
+             for (int i = 0; i < 10; i++)
+                 orig.Add(i);
+             MyLinkedList<int> copylink = orig;
+             MyLinkedList<int> clone = (MyLinkedList<int>)orig.Clone();
+             foreach (int i in orig)
+                 Console.Write(i + " ");
+             Console.WriteLine();
+             foreach (int i in copylink)
+                 Console.Write(i + " ");
+             Console.WriteLine();
+             foreach (int i in clone)
+                 Console.Write(i + " ");
+             Console.WriteLine();
+             orig.Remove(1);
+             orig.Remove(2);
+             foreach(int i in orig)
+                 Console.Write(i + " ");
+             Console.WriteLine();
+             foreach(int i in copylink)
+                 Console.Write(i + " ");
+             Console.WriteLine();
+             foreach(int i in clone)
+                 Console.Write(i + " ");
+             Console.WriteLine();*/
 
 
             #endregion
@@ -183,8 +183,8 @@ namespace L1nkedL1st
             Random rnd = new Random();
             for (int i = 0; i < 50; i++)
                 sort.Add(rnd.Next(123, 1000));
-            /*foreach (int i in sort)
-                Console.Write(i + " ");*/
+            foreach (int i in sort)
+                Console.Write(i + " ");
             Console.WriteLine();
             sort.Sort(new ItemComparer<int>());
             Item<int>[] kkkk = new Item<int>[10];
@@ -194,15 +194,36 @@ namespace L1nkedL1st
             for (int i = 0; i < 10; i++)
                 Console.Write(kkkk[i].value + " ");
             Console.WriteLine();
-            Array.Sort(kkkk, new ItemComparer<int>());
-            for(int i = 0; i < 10; i++)
-                Console.Write(kkkk[i].value +  " ");
-            /*foreach(int i in sort)
-                Console.Write(i + " " );*/
-   
-            //Array.sort
-            #endregion
-    #region trash
+            Array.Sort(kkkk, new ItemComparer2<int>());
+            for (int i = 0; i < 10; i++)
+                Console.Write(kkkk[i].value + " ");
+            Console.WriteLine();
+            foreach (int i in sort)
+                Console.Write(i + " ");
+            MyLinkedList<int> compare = new MyLinkedList<int>();
+            MyLinkedList<int> compare2 = new MyLinkedList<int>();
+            for (int i = 0; i < 10; i++)
+            {
+                compare.Add(i);
+                compare2.Add(i);
+            }
+            Console.WriteLine(compare.CompareTo(compare2));
+            MyLinkedList<string> aaaa = new MyLinkedList<string>();
+            aaaa.Add("c");
+            aaaa.Add("d");
+            aaaa.Add("b");
+            aaaa.Add("a");
+            Item<string>[] arraytest = new Item<string>[4];
+            arraytest[0] = new Item<string>("c");
+            arraytest[1] = new Item<string>("d");
+            arraytest[2] = new Item<string>("b");
+            arraytest[3] = new Item<string>("a");
+            Array.Sort(arraytest, new ItemComparer2<string>());
+            for (int i = 0; i < 4; i++)
+                Console.WriteLine(arraytest[i].value);
+            
+                #endregion
+                #region trash
                 /*Item<int> a = new Item<int>(0);
                 Item<int> b = new Item<int>(1);
                 Item<int> c = new Item<int>(2);
@@ -236,7 +257,9 @@ namespace L1nkedL1st
                     Console.WriteLine(i.value);
                 */
                 #endregion
-             Console.ReadKey();
+
+
+                Console.ReadLine();
 
 
         }
