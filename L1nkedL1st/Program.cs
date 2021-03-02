@@ -131,14 +131,14 @@ namespace L1nkedL1st
             add.Remove(addcheck);
             foreach (int i in add)
                 Console.Write(i + " ");
-            Console.WriteLine();*/
+            Console.WriteLine();
 
             #endregion
             #region Проверка IEnumerable<T>
             //Console.WriteLine("Проверки не будет");
             #endregion
             #region Проверка IComparable
-            /*MyLinkedList<int> list1 = new MyLinkedList<int>(123);
+            MyLinkedList<int> list1 = new MyLinkedList<int>(123);
             MyLinkedList<int> list2 = new MyLinkedList<int>();
             MyLinkedList<string> list3 = new MyLinkedList<string>("AAAAAAAA");
             for(int i = 0; i < 10; i++)
@@ -179,7 +179,7 @@ namespace L1nkedL1st
 
             #endregion
             #region Проверка Sort
-            MyLinkedList<int> sort = new MyLinkedList<int>();
+            /*MyLinkedList<int> sort = new MyLinkedList<int>();
             Random rnd = new Random();
             for (int i = 0; i < 50; i++)
                 sort.Add(rnd.Next(123, 1000));
@@ -220,46 +220,68 @@ namespace L1nkedL1st
             arraytest[3] = new Item<string>("a");
             Array.Sort(arraytest, new ItemComparer2<string>());
             for (int i = 0; i < 4; i++)
-                Console.WriteLine(arraytest[i].value);
-            
-                #endregion
-                #region trash
-                /*Item<int> a = new Item<int>(0);
-                Item<int> b = new Item<int>(1);
-                Item<int> c = new Item<int>(2);
-                Item<int> d = new Item<int>(3);
-                MyLinkedList<int> list = new MyLinkedList<int>();
-                list.Add(a);
-                list.Add(b);
-                list.Add(c);
-                list.Add(d);
-                Console.WriteLine(list.Contains(c));
-                list.Remove(3);
-                list.Output();
-                int[] copy = new int[1];
-                list.CopyTo(copy, 9);
-                foreach(Item<int> i in list)
-                    Console.WriteLine(i.value);
-                Item<int> kk = new Item<int>(1);
-                Item<int> ff = new Item<int>(2);
-                Item<string> gg = new Item<string>("1");
-                Item<decimal> dd = new Item<decimal>(1);
-                Console.WriteLine(ff >= kk);
-                MyLinkedList<int> tt = new MyLinkedList<int>();
-                tt.Add(ff);
-                tt.Add(kk);
-                Item<int>[] mlist = new Item<int>[102];
-                Random rnd = new Random();
-                for (int i = 0; i < 102; i++)
-                    mlist[i] = new Item<int>(rnd.Next(0, 1000));
-                //Array.Sort(tt, Item<int>, new ItemComparer<int>());
-                foreach(Item<int> i in mlist)
-                    Console.WriteLine(i.value);
-                */
-                #endregion
+                Console.WriteLine(arraytest[i].value);*/
 
+            #endregion
+            #region trash
+            /*Item<int> a = new Item<int>(0);
+            Item<int> b = new Item<int>(1);
+            Item<int> c = new Item<int>(2);
+            Item<int> d = new Item<int>(3);
+            MyLinkedList<int> list = new MyLinkedList<int>();
+            list.Add(a);
+            list.Add(b);
+            list.Add(c);
+            list.Add(d);
+            Console.WriteLine(list.Contains(c));
+            list.Remove(3);
+            list.Output();
+            int[] copy = new int[1];
+            list.CopyTo(copy, 9);
+            foreach(Item<int> i in list)
+                Console.WriteLine(i.value);
+            Item<int> kk = new Item<int>(1);
+            Item<int> ff = new Item<int>(2);
+            Item<string> gg = new Item<string>("1");
+            Item<decimal> dd = new Item<decimal>(1);
+            Console.WriteLine(ff >= kk);
+            MyLinkedList<int> tt = new MyLinkedList<int>();
+            tt.Add(ff);
+            tt.Add(kk);
+            Item<int>[] mlist = new Item<int>[102];
+            Random rnd = new Random();
+            for (int i = 0; i < 102; i++)
+                mlist[i] = new Item<int>(rnd.Next(0, 1000));
+            //Array.Sort(tt, Item<int>, new ItemComparer<int>());
+            foreach(Item<int> i in mlist)
+                Console.WriteLine(i.value);
+            */
+            #endregion
 
-                Console.ReadLine();
+            MyLinkedList<int>[] arrayList = new MyLinkedList<int>[4];
+            MyLinkedList<int> first = new MyLinkedList<int>();
+            MyLinkedList<int> second = new MyLinkedList<int>();
+            MyLinkedList<int> third = new MyLinkedList<int>();
+            MyLinkedList<int> fourth = new MyLinkedList<int>();
+            for (int i = 0; i < 10; i++)
+                first.Add(i);
+            for (int i = 0; i < 7; i++)
+                second.Add(i);
+            for (int i = 0; i < 9; i++)
+                third.Add(i);
+            for (int i = 0; i < 3; i++)
+                fourth.Add(i);
+            arrayList[0] = first;
+            arrayList[1] = second;
+            arrayList[2] = third;
+            arrayList[3] = fourth;
+            for (int i = 0; i < 4; i++)
+                Console.Write(arrayList[i].Count + " ");
+            Console.WriteLine();
+            Array.Sort(arrayList, new ListComparer<int>());
+            for(int i = 0; i < 4; i++)
+                Console.Write(arrayList[i].Count + " ");
+            Console.ReadLine();
 
 
         }
